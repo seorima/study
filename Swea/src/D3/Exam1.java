@@ -8,14 +8,14 @@ public class Exam1 {
 		// TODO Auto-generated method stub
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("ÇÏ³ªÀÇ ½Ç¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
+		System.out.println("ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ç¼ï¿½ì•ˆë…•ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½ : ");
 		System.out.println();
 		
 		int number = 0;
 		number=sc.nextInt();
 		
-		System.out.println("¹ö¸² : %d"+(int)number);
-		System.out.println("¹Ý¿Ã¸² : %d");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ : %d"+(int)number);
+		System.out.println("ï¿½Ý¿Ã¸ï¿½ : %d");
 	}
 
 }
