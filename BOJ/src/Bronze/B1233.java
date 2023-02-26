@@ -10,7 +10,6 @@ public class B1233 {
 		Scanner sc = new Scanner(System.in);
 		int s1,s2,s3=0;
 		int sum,count=0;
-		int shy=0;
 		
 		
 		s1=sc.nextInt();
