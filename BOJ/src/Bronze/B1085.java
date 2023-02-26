@@ -10,6 +10,7 @@ public class B1085 {
 		Scanner sc = new Scanner(System.in);
 		int x,y,w,h=0;
 		int x_min,y_min,result=0;
+		int whe=0;
 		
 		
 		x=sc.nextInt();
