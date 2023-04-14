@@ -1,5 +1,6 @@
 package Silver;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -18,10 +19,12 @@ public class B1260 {
 	
 	public void DFS(int start) {
 		check[start] = true;
+		System.out.print(start + " ");
 		
-		
-		for(int i=0;i<m;i++ ) {
-			if(array[start][])
+		for(int i=1;i<=n;i++ ) {
+			if(array[start][i]==1 && check[i]==false) {
+				DFS(i);
+			}
 		}
 		
 		
@@ -29,6 +32,24 @@ public class B1260 {
 	
 	public void BFS(int start) {
 		Queue<Integer> q = new LinkedList<>();
+		q.add(start);
+		check[start] = true;
+
+		System.out.print(start + " ");
+		
+		while(!q.isEmpty()) {
+			int tmp = q.poll(); 
+			
+			for(int i=1;i<check.length;i++) {
+				if(array[tmp][i]==1 && check[i] ==false) {
+					q.add(i);
+					check[i] = true;
+					System.out.print(i + " ");
+					
+				}
+			}
+		}
+	
 		
 		
 	}
@@ -46,7 +67,7 @@ public class B1260 {
 		array = new int[1001][1001];
 		check = new boolean[1001];
 		
-		for(int i=0;i<n;i++) {
+		for(int i=0;i<m;i++) {
 			
 			int a = sc.nextInt();
 			int b = sc.nextInt();
@@ -55,8 +76,11 @@ public class B1260 {
 			
 		}
 		
-		t.DFS(1);
-		t.BFS(1);
+		t.DFS(v);
+		System.out.println();
+		
+		Arrays.fill(check, false);
+		t.BFS(v);
 		
 		
 		
