@@ -17,6 +17,10 @@ public class B2028 {
 			int num = n*n;
 			
 			int len = (int)n.length();
+
+			for(int i=0;i<len.size();i++) {
+				
+			}
 			
 			System.out.println(len);
 			
