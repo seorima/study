@@ -61,17 +61,21 @@ public class Main {
 
         for(int i=0;i<n;i++){ // 행
             for(int j=0;j<n-1;j++){
+                if(arr[i][j] != (arr[i][j+1])){
                     T.swap(i,i,j,j+1);
                     T.find(i,j);
                     T.swap(i,i,j+1,j);
+                }
             }
         }
 
         for(int i=0;i<n;i++){ // 열
             for(int j=0;j<n-1;j++){
+                if(arr[j][i] != (arr[j+1][i])){
                     T.swap(j,j+1,i,i);
                     T.find(j,i);
                     T.swap(j+1,j,i,i);
+                }
             }
         }
 
