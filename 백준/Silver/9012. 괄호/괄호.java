@@ -1,33 +1,43 @@
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
-public class Main {
-    public static String solution(String n){
-        String result = "NO";
+public class  Main {
+    public static String VPS(String str){
+        Stack<Character> s = new Stack<>();
 
-        Stack<String> stack = new Stack<>();
-        for(int i=0;i<n.length();i++){
-            if(n.charAt(i) == '('){
-                stack.push("(");
+        for(int j=0;j<str.length();j++){
+            char tmp = str.charAt(j);
+            if(tmp == ')'){
+                if(s.isEmpty()){
+                    return "NO";
+                }else{
+                    s.pop();
+                }
+
             }else{
-                if(stack.isEmpty()) return result;
-                stack.pop();
+                s.push(tmp);
             }
         }
 
-        if(stack.isEmpty()){
-            result="YES";
+        if(!s.isEmpty()){
+            return "NO";
         }
 
-        return result;
+        return "YES";
     }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T=sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        Main T = new Main();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int n = Integer.parseInt(br.readLine());
 
-        for(int tc = 0; tc<T; tc++){
-            String str = sc.next();
-            System.out.println(solution(str));
+        for(int i=0;i<n;i++){
+            String str = br.readLine();
+            System.out.println(T.VPS(str));
         }
 
     }
