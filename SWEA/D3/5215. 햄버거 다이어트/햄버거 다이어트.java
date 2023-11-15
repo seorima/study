@@ -1,49 +1,60 @@
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+class Ham{
+    public int t;
+    public int k;
 
+    Ham(int t, int k){
+        this.t = t;
+        this.k = k;
+    }
+}
 public class Solution {
 
-    static int[] score;
-    static int[] kcal;
-    static int n;
-    static int l;
-    static int result;
+    static int max ;
+    static int n,l;
+    static ArrayList<Ham> arr;
+    public static void DFS(int t_total,int k_total, int L){
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
+        if(k_total>l) return;
 
+        if(L==n) {
+            max = Math.max(t_total,max);
+            return;
+        }
 
-        for(int k=1;k<=T;k++){
-                result=0;
-                n=sc.nextInt();
-                l=sc.nextInt();
-                score = new int[n];
-                kcal = new int[n];
+            DFS(t_total + arr.get(L).t,k_total + arr.get(L).k,L+1);
+            DFS(t_total,k_total,L+1);
+
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        StringTokenizer st;
+
+        for(int tc = 1;tc<=T;tc++){
+            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(st.nextToken());
+            l = Integer.parseInt(st.nextToken());
+            arr = new ArrayList<>();
 
             for(int i=0;i<n;i++){
-                score[i] = sc.nextInt();
-                kcal[i] = sc.nextInt();
+                st = new StringTokenizer(br.readLine());
+                int a  = Integer.parseInt(st.nextToken());
+                int b  = Integer.parseInt(st.nextToken());
+                arr.add(new Ham(a,b));
             }
 
-            ham(0,0,0);
+            max = 0;
+            DFS(0,0,0);
 
-            System.out.println("#"+k+" "+result);
+            System.out.println("#"+tc + " " + max );
 
         }
-        sc.close();
-    }
-
-    private static void ham(int idx,int sums,int sumk){
-        if(sumk>l){
-            return;
-        }if(idx==n){
-           result = Math.max(result,sums);
-            return;
-        }
-            ham(idx+1,score[idx]+sums,kcal[idx]+sumk);
-            ham(idx+1,sums,sumk);
-
-
     }
 }
