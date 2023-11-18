@@ -1,58 +1,48 @@
-import java.util.Scanner;
-import java.util.Stack;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
         int[] arr = new int[1001];
-
-        int sum=0;
-
-        int start = 1000;
-        int end = 0;
+        StringTokenizer st;
+        int max = Integer.MIN_VALUE;
+        int mid = 0; // 가운데 가장 큰 값
+        int idx = 0;
 
         for(int i=0;i<n;i++){
-            int l=sc.nextInt();
-            int h=sc.nextInt();
-            arr[l]=h;
-            start= Math.min(l,start);
-            end= Math.max(l,end);
-        }
-
-        Stack<Integer> stack = new Stack<>();
-        int tmp=arr[start];
-        for(int i=start+1;i<=end;i++){
-            if(tmp>arr[i]){
-                stack.push(i);
-            }else{
-                while(!stack.isEmpty()){
-                    int x =stack.pop();
-                    arr[x]=tmp;
-
-                }
-                tmp=arr[i];
-            }
-
-        }
-
-        stack.clear();
-        tmp= arr[end];
-        for(int i=end-1;i>=start;i--){
-            if(tmp>arr[i]){
-                stack.push(i);
-            }else{
-                while(!stack.isEmpty()){
-                    int x =stack.pop();
-                    arr[x]=tmp;
-                }
-                tmp=arr[i];
+            st = new StringTokenizer(br.readLine());
+            int l = Integer.parseInt(st.nextToken());
+            int h = Integer.parseInt(st.nextToken());
+            arr[l] = h;
+            if(mid<h) {
+                mid = h;
+                idx = l;
             }
         }
-        int result = 0;
-        for (int i = start; i <= end; i++) {
-            result += arr[i];
+
+        int sum = 0;
+        for(int i=1;i<=idx;i++){
+            if(arr[i]>max){
+                max = arr[i];
+
+            }
+            sum+=max;
         }
-        System.out.print(result);
+        max = Integer.MIN_VALUE;
+
+        for(int i=1000;i>idx;i--){
+            if(arr[i]>max){
+                max = arr[i];
+            }
+            sum+=max;
+        }
+
+        System.out.println(sum);
+
     }
 }
