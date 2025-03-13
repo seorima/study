@@ -1,33 +1,27 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 class Solution {
+    public void DFS(int n,int node, int[] ch,int[][] computers){
+            for(int j=0;j<n;j++){
+                if(ch[j] == 0 && computers[node][j]==1){
+                    ch[j] = 1;
+                    DFS(n,j,ch,computers);
+                }
+            }
+    }
     public int solution(int n, int[][] computers) {
         int answer = 0;
-        boolean[] ch = new boolean[n];
-        
-        //  for(int i = 0; i < n; i++){
-        //     ch[i] = false;
-        // }
+        int[] ch = new int[n];
         
         for(int i=0;i<n;i++){
-            if(ch[i]==false){
+            if(ch[i] == 0){
                 answer++;
-                DFS(i,ch,computers);
+                ch[i] = 1;
+                DFS(n,i,ch,computers);
             }
         }
         
         return answer;
-    }
-    
-    public void DFS(int node, boolean[] ch, int[][] computers){
-        ch[node] = true;
-        
-        for(int i=0;i<computers.length;i++){
-            if(ch[i]==false && computers[node][i] == 1){
-                DFS(i,ch,computers);
-            }
-        }
-        
     }
 }
