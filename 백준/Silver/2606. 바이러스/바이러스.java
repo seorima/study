@@ -1,50 +1,50 @@
-import java.util.Scanner;
+
+import java.util.*;
+import java.io.*;
+
 
 public class Main {
-	
-	static int n=0;
-	static int m=0;
-	static int count =0;
-	static int[][] array;
-	static boolean[] check;
-	
-	public int DFS(int start ) {
-		check[start]=true;
-		
-		for(int i=1;i<=n;i++) {
-			if(array[start][i]==1 && check[i]==false) {
 
-				count++;
-				DFS(i);
-				
-			}
-		}
-		
-		return count;
-		
-	}
+    static ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+    static int[] ch;
+    static int cnt;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void DFS(int start){
 
-		Main t = new Main();
-		
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		m = sc.nextInt();
-		
-		array = new int[101][101];
-		check = new boolean[101];
-		
-		for(int i=1;i<=m;i++) {
-			int a = sc.nextInt();
-			int b = sc.nextInt();
-			array[a][b] = array[b][a] = 1;
-		}
-		
-		System.out.println(t.DFS(1));
-		
+        ch[start] = 1;
+        for(int x : arr.get(start)){
+            if(ch[x]==0){
+                cnt++;
+                DFS(x);
+            }
+        }
 
-	}
+    }
 
+    public static void main(String[] args) throws IOException{
+        Main T = new Main();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int com = Integer.parseInt(br.readLine());
+        int n = Integer.parseInt(br.readLine());
+
+        for(int i=0;i<=com;i++){
+            arr.add(new ArrayList<Integer>());
+        }
+        ch= new int[com+1];
+        StringTokenizer st;
+
+
+        for(int i=0;i<n;i++){
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            arr.get(a).add(b);
+            arr.get(b).add(a);
+        }
+        T.DFS(1);
+
+        System.out.println(cnt);
+
+
+    }
 }
